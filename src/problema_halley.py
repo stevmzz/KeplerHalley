@@ -50,7 +50,7 @@ def experimento_halley_real(metodos):
         print(f"\nt = {t:.2f} años | M = {M:.6f} rad | Intervalo: [{M - E_HALLEY:.4f}, {M + E_HALLEY:.4f}]")
 
         evaluar_metodo("Bisección", metodos.biseccion, (f, M - E_HALLEY, M + E_HALLEY, 200, tol), E_HALLEY, M)
-        evaluar_metodo("Newton-Raphson", metodos.newton, (f, df, M, 100, tol), E_HALLEY, M)
+        evaluar_metodo("Newton-Raphson", metodos.newton_raphson, (f, df, M, 100, tol), E_HALLEY, M)
         evaluar_metodo("Secante", metodos.secante, (f, M, M + E_HALLEY / 2.0, 100, tol), E_HALLEY, M)
         evaluar_metodo("Steffensen", metodos.steffensen, (f, M, 100, tol), E_HALLEY, M)
 
@@ -68,7 +68,7 @@ def experimento_caso_dificil(metodos):
     for E0 in valores_E0:
         print(f"\nValor inicial E0 = {E0:.4f}:")
         evaluar_metodo("Bisección", metodos.biseccion, (f, M_peq - e_dif, M_peq + e_dif, 200, tol), e_dif, M_peq)
-        evaluar_metodo("Newton-Raphson", metodos.newton, (f, df, E0, 100, tol), e_dif, M_peq)
+        evaluar_metodo("Newton-Raphson", metodos.newton_raphson, (f, df, E0, 100, tol), e_dif, M_peq)
         evaluar_metodo("Secante", metodos.secante, (f, E0, E0 + e_dif / 2.0, 100, tol), e_dif, M_peq)
         evaluar_metodo("Steffensen", metodos.steffensen, (f, E0, 100, tol), e_dif, M_peq)
 
