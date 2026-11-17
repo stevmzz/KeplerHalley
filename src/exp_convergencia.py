@@ -27,7 +27,7 @@ REPETICIONES = 200        # repeticiones por método para medir el tiempo
 CARPETA_RES = Path(__file__).resolve().parent.parent / "resultados"
 METODOS = ["Bisección", "Newton-Raphson", "Secante", "Steffensen"]
 TEORICO = {"Bisección": "1 (lineal, razón ~1/2)", "Newton-Raphson": "2",
-           "Secante": "≈1.618", "Steffensen": "2"}
+           "Secante": "~1.618", "Steffensen": "2"}
 
 
 def valores_iniciales(nombre, e, M):

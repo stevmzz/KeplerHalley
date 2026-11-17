@@ -1,3 +1,4 @@
+"""Módulo del problema físico de Kepler (cometa Halley) y experimentos de la Parte B."""
 import math
 import time
 
@@ -28,17 +29,19 @@ def posicion_orbital(E, a=A_HALLEY, e=E_HALLEY):
 
 
 def evaluar_metodo(nombre, func_metodo, args_metodo, e, M):
-    """Mide tiempo de ejecución y estandariza la impresión exigida por el curso."""
+    """Ejecuta el método, cronometra y muestra la salida exigida por el enunciado."""
     t0 = time.perf_counter()
     xk, erk, k, conv = func_metodo(*args_metodo)
     dt = time.perf_counter() - t0
+    if xk is None:
+        print(f"{nombre:<15} | No convergió (sin cambio de signo)")
+        return
     residuo = abs(f_kepler(xk, e, M))
     estado = "Convergió" if conv == 1 else "No convergió"
     print(f"{nombre:<15} | {estado:<12} | k={k:<4} | E*={xk:.10f} | |f(E*)|={residuo:.2e} | t={dt:.6f}s")
 
 
 def experimento_halley_real(metodos):
-    """Experimento 1: Órbita real de Halley en distintos instantes de tiempo."""
     tiempos = [1.0, 5.0, 15.0, T_HALLEY / 2.0]
     tol = 1e-10
     print("\n--- EXPERIMENTO 1: ÓRBITA REAL DEL COMETA HALLEY ---")
@@ -56,7 +59,6 @@ def experimento_halley_real(metodos):
 
 
 def experimento_caso_dificil(metodos):
-    """Experimento 2: Excentricidad extrema (e -> 1) y M pequeña variando E0."""
     e_dif = 0.999
     M_peq = 0.01
     tol = 1e-10
@@ -74,5 +76,4 @@ def experimento_caso_dificil(metodos):
 
 
 if __name__ == "__main__":
-    # Cuando A 
     print(f"Constantes cargadas -> a = {A_HALLEY:.4f} UA, T = {T_HALLEY:.4f} años")
